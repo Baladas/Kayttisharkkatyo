@@ -1,0 +1,104 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/Screen.jack
+
+/**
+ * Graphic screen library.
+ */
+class Screen {
+    static Array screen;
+    static boolean colourX;
+    static int whitePixel;
+    static int blackPixel;
+    static boolean white;
+    static boolean black;
+
+    /** Initializes the Screen. */
+    function void init() {
+        let screen = 16384;
+        let white = false;
+        let black =true;
+        let whitePixel = 0;
+        let blackPixel = 1;
+        let colourX = black;
+        return
+    }
+
+    /** Erases the whole screen. */
+    function void clearScreen() {
+        var int i;
+        let i = 0;
+        while(i < 8192) {
+            let screen[i] = white;
+        }
+        return;
+    }
+
+    /** Sets the color to be used in further draw commands
+     *  where white = false, black = true. */
+    function void setColor(boolean b) {
+        let colourX = b;
+        return;
+    }
+
+    /** Draws the (x, y) pixel. Calculates the right memory cell of display memory map area. The fourth line calculates the individual chapters in the memory section and finds out which bits will be 1 and which ones are 0. As drawn in the individual bits, it's required that a bit presentation is exactly: one bit is number 1 and the rest are 0. In the last row it stores the correct binary number in the memory of the display memory map. */
+    function void drawPixel(int x, int y) {
+        var int address;
+        var int mask;
+        let address = (y*32) + (x/16);
+        let mask = Math.two_to_the(x & 15); // powers of two from Math function
+        if(colourX) {
+            let screen[address] = screen[address] | mask;
+        } 
+        else {
+            let screen[address] = screen[address] & ~mask; 
+        }
+        return;
+    }
+
+    /** Draws a line from (x1, y1) to (x2, y2). */
+    function void drawLine(int x1, int y1, int x2, int y2) {
+    }
+
+    /** Draws a filled rectangle where the top left corner
+     *  is (x1, y1) and the bottom right corner is (x2, y2). */
+    function void drawRectangle(int x1, int y1, int x2, int y2) {
+        var int y;
+
+        let y = y1;
+        while( ~(y > y2) ) {
+            do Screen.drawHorizontalLine(x1, x2, y);
+            let y = y + 1;
+        }
+        return;
+    }
+
+    /** Draws a filled circle of radius r around (cx, cy). */
+    function void drawCircle(int cx, int cy, int r) {
+        var int dx;
+        var int dy;
+        var int rSquared;
+
+        let dy = -r;
+        let rSquared = r * r;
+        while ( ~(dy > r) ) {
+            let dx = Math.sqrt(rSquared-(dy * dy));
+            do Screen.drawHorizontalLine( cx - dx, cx + dx, cy + dy );
+            let dy = dy + 1;
+        }
+        return;
+    }
+
+    /** Draws a horizontal line. */
+    function void drawHorizontalLine(int x1, int x2, int y) {
+    }
+
+    /** Draws a vertical line. */
+    function void drawVerticalLine(int x, int y1, int y2) {
+    }
+
+    /** Draws a diagonal line. */
+    function void drawDiagonalLine(int x1, int y1, int x2, int y2, int dx, int dy) {
+    }
+}

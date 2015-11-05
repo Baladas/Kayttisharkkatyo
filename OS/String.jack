@@ -1,0 +1,90 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/String.jack
+
+/**
+ * Represents a String object. Implements the String type.
+ */
+class String {
+	field int strLength;
+	field int bufferLenght;
+	field int Array buffer;
+
+    /** Constructs a new empty String with a maximum length of maxLength. */
+    constructor String new(int maxLength) {
+		if (maxLength = 0) {
+			let maxLength = 1;
+			}
+		let buffer = Array.new(maxLength);
+		let bufferLength = maxLength;
+		let strLength = 0;
+		return this;
+    }
+	
+
+    /** De-allocates the string and frees its space. */
+    method void dispose() {
+		do Array.dispose(buffer);
+		return;
+    }
+
+    /** Returns the current length of this String. */
+    method int length() {
+		return strLength;
+    }
+
+    /** Returns the character at location j. */
+    method char charAt(int j) {
+		return buffer[j];
+    }
+
+    /** Sets the j'th character of this string to be c. */
+    method void setCharAt(int j, char c) {
+		let buffer[j] = c;
+		return;
+    }
+
+    /** Appends the character c to the end of this String.
+     *  Returns this string as the return value. */
+    method String appendChar(char c) {
+		if(strLength < bufferLength) {
+			let buffer[strLength] = c;
+			let strLength = strLength + 1;
+		}
+		return this;
+    }
+
+    /** Erases the last character from this String. */
+    method void eraseLastChar() {
+		if(strLength > 0) {
+			let strLength = strLength - 1;
+		}
+		return;
+    }
+
+    /** Returns the integer value of this String until the first non
+     *  numeric character. */
+    method int intValue() {
+		
+    }
+
+    /** Sets this String to hold a representation of the given number. */
+    method void setInt(int j) {
+    }
+
+    /** Returns the new line character. */
+    function char newLine() {
+		return 128;
+    }
+
+    /** Returns the backspace character. */
+    function char backSpace() {
+		return 129;
+    }
+
+    /** Returns the double quote (") character. */
+    function char doubleQuote() {
+		return 34;
+    }
+}
