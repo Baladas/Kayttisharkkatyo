@@ -51,8 +51,8 @@ class Keyboard {
 	}
 	let key = Keyboard.keyPressed();
 	while(~(Keyboard.keyPressed() = 0)) {
+		do Output.printChar(key);
 	}
-	do Output.printChar(key);
 	return key;	
     }
 
