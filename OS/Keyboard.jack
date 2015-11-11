@@ -50,8 +50,7 @@ class Keyboard {
 	while(Keyboard.keyPressed() = 0) {
 	}
 	let key = Keyboard.keyPressed();
-	while(~(Keyboard.keyPressed() = 0)) {
-	}
+	while(~(Keyboard.keyPressed() = 0) {}
 	do Output.printChar(key);
 	return key;	
     }
