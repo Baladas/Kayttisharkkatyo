@@ -62,7 +62,7 @@ class Keyboard {
      */
     function String readLine(String message) {
 	var String line;
-	var char c;
+	var char character;
 
 	do Output.printString(message);
 	
@@ -70,7 +70,7 @@ class Keyboard {
 	let character = Keyboard.readChar();
 	while(~(character = String.newLine()) ) {
 		if(character = String.backSpace() ) {
-			do line.eraselastChar();
+			do line.eraseLastChar();
 		}
 		else {
 			do line.appendChar(character);

@@ -22,7 +22,7 @@ class Screen {
         let whitePixel = 0;
         let blackPixel = 1;
         let colourX = black;
-        return
+        return;
     }
 
     /** Erases the whole screen. */
@@ -59,6 +59,8 @@ class Screen {
 
     /** Draws a line from (x1, y1) to (x2, y2). */
     function void drawLine(int x1, int y1, int x2, int y2) {
+	do Screen2.drawLine(x1, y1, x2, y2);
+	return;	
     }
 
     /** Draws a filled rectangle where the top left corner
@@ -66,10 +68,9 @@ class Screen {
     function void drawRectangle(int x1, int y1, int x2, int y2) {
         var int y;
 
-        let y = y1;
-        while( ~(y > y2) ) {
-            do Screen.drawHorizontalLine(x1, x2, y);
-            let y = y + 1;
+         while( ~(y1 > y2) ) {
+            do Screen.drawLine(x1, x2, y1, y2);
+            let y1 = y1 + 1;
         }
         return;
     }
@@ -84,21 +85,9 @@ class Screen {
         let rSquared = r * r;
         while ( ~(dy > r) ) {
             let dx = Math.sqrt(rSquared-(dy * dy));
-            do Screen.drawHorizontalLine( cx - dx, cx + dx, cy + dy );
+            do Screen.drawLine(cx - dx, cx + dx, cy - dy, cy + dy);
             let dy = dy + 1;
         }
         return;
-    }
-
-    /** Draws a horizontal line. */
-    function void drawHorizontalLine(int x1, int x2, int y) {
-    }
-
-    /** Draws a vertical line. */
-    function void drawVerticalLine(int x, int y1, int y2) {
-    }
-
-    /** Draws a diagonal line. */
-    function void drawDiagonalLine(int x1, int y1, int x2, int y2, int dx, int dy) {
     }
 }

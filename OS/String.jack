@@ -7,15 +7,15 @@
  * Represents a String object. Implements the String type.
  */
 class String {
+	field Array buffer;
 	field int strLength;
-	field int bufferLenght;
-	field int Array buffer;
+	field int bufferLength;
 
     /** Constructs a new empty String with a maximum length of maxLength. */
     constructor String new(int maxLength) {
 		if (maxLength = 0) {
 			let maxLength = 1;
-			}
+		}
 		let buffer = Array.new(maxLength);
 		let bufferLength = maxLength;
 		let strLength = 0;
@@ -25,7 +25,7 @@ class String {
 
     /** De-allocates the string and frees its space. */
     method void dispose() {
-		do Array.dispose(buffer);
+		do Array.dispose();
 		return;
     }
 
@@ -66,11 +66,15 @@ class String {
     /** Returns the integer value of this String until the first non
      *  numeric character. */
     method int intValue() {
+	return String2.intValue();
 		
     }
 
     /** Sets this String to hold a representation of the given number. */
     method void setInt(int j) {
+	do String2.setInt(j);
+	return;
+	
     }
 
     /** Returns the new line character. */

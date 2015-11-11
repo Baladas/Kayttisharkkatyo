@@ -13,14 +13,16 @@
 class Output {
 
     // Character map for printing on the left of a screen word
-    static Array charMaps; 
+    static Array charMaps;
+    static int cursorX, cursorY;
+    static Array screen; 
 
     /** Initializes the screen and locates the cursor at the screen's top-left. */
     function void init() {
-		let screen = 16384; /** 64 text columns * 256 columns */
-		let cursorY = 0;
-		let cursorX = 0;
-		do Output.initMap();
+	let screen = 16384; /** 64 text columns * 256 columns */
+	let cursorY = 0;
+	let cursorX = 0;
+	do Output.initMap();
 		return;
 		
     }
@@ -185,7 +187,8 @@ class Output {
     /** Prints c at the cursor location and advances the cursor one
      *  column forward. */
     function void printChar(char c) {
-		
+	do Output2.printChar(c);
+	return;		
     }
 
     /** Prints s starting at the cursor location, and advances the
@@ -194,7 +197,7 @@ class Output {
 		var int i;
 		let i = 0;
 		while(i < s.length()) {
-			do Output.printChar(s.charAt(i)));
+			do Output.printChar(s.charAt(i));
 			let i = i + 1;
 			let cursorX = cursorX + 1;
 		}
